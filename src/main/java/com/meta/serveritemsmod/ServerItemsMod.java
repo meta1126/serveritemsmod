@@ -96,9 +96,9 @@ public class ServerItemsMod
             event.accept(ModItems.RAERGATETICKET.get());
             event.accept(ModItems.SUPERRAERGATETICKET.get());
             event.accept(ModItems.ULTRARAERGATETICKET.get());
+            event.accept(ModItems.SOULBALL.get());
         }
     }
-    .ModItems
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event)

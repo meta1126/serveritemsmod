@@ -1,6 +1,7 @@
 package com.meta.serveritemsmod.common;
 
 import com.meta.serveritemsmod.ServerItemsMod;
+import com.meta.serveritemsmod.items.ModItems;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -19,11 +20,26 @@ public class ModEvents {
         }
     }
     private static void handleDeathPenalty(ServerPlayer player){
-        ItemStack penaltyItem = findPenaktyItem(player);
+        ItemStack penaltyItem = findPenaltyItem(player);
         if (!penaltyItem.isEmpty()) {
             penaltyItem.shrink(1);
         }else{
             dropInventory(player);
+        }
+    }
+    private  static ItemStack findPenaltyItem(ServerPlayer player) {
+        for (ItemStack stack : player.getInventory().items) {
+            if (stack.getItem() == ModItems.SOULBALL.get()){
+                return stack;
+            }
+        }
+        return  ItemStack.EMPTY;
+    }
+    private static  void dropInventory(ServerPlayer player){
+        for (ItemStack stack : player.getInventory().items) {
+            if (!stack.isEmpty()) {
+                player.drop(stack, true, false);
+            }
         }
     }
 }
